@@ -12,7 +12,7 @@
 */
 
 $app->get('/', 'loginController@index');
-$app->get('get_trouble_query', 'sqlMonitoringController@get_trouble_query');
+$app->get('/get_trouble_query/', 'sqlMonitoringController@get_trouble_query');
 $app->get('hello', function() {
     return 'Hello World';
 });

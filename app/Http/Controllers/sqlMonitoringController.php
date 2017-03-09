@@ -16,16 +16,17 @@ class sqlMonitoringController extends Controller
     }
 
     public function get_trouble_query(){
+        // dd(env("DB_HOST"));
         $trouble_queries = DB::table('tbl_history_trouble_processlist as a')
-            ->where("a.is_kill", "=", 0)
-            ->get();
+            ->where("a.is_kill", "=", 0);
         // $db = app('db');
         // $accountsDatabase = $db->connection('accounts');
         // $threeNewestUsers = app('db')->select("SELECT * FROM g_users ORDER BY created_at DESC LIMIT 3");
         // DB::select("SELECT * FROM users");
-        if($trouble_queries->count() > 0)
-            return response()->json(['code_result' => 0, 'message_result' => 'Data ', 'data' => $trouble_queries->toArray()]);
-        else
+        if($trouble_queries->count() > 0){
+            $trouble_queries = json_decode(json_encode($trouble_queries->get()), true);
+            return response()->json(['code_result' => 0, 'message_result' => 'Data ', 'data' => $trouble_queries]);
+        }else
             return response()->json(['code_result' => 1, 'message_result' => 'Tidak ada data']);
     }
 
@@ -45,7 +46,7 @@ class sqlMonitoringController extends Controller
             ->where("a.TIME", ">", $max_time)
             ->whereNotNull("a.INFO")
             ->get();
-        $query_trouble_count = $processlist->count();
+        $query_trouble_count = count($processlist);
         foreach($processlist as $row){
             // $row->ID = 55;
             // $row->HOST = "localhost:60602";
@@ -80,7 +81,8 @@ class sqlMonitoringController extends Controller
         }
         if($query_trouble_count > 0){
             echo "There are $query_trouble_count query must kill at ".date("Y-m-d H:i:s");
-        }
+        }else
+            echo "Bravo your server in stable state\n";
     }
 
     function sendGCM($message, $id) {
