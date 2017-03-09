@@ -1,6 +1,6 @@
 # DB Monitoring
 
-DB Monitoring could be used to see your database status, show current process on your database and kill the suspiciour or unwanted process that run on your database. With this project, hopefully we could make others developer out there doesn't waste their time to monitor their databases. Even you don't want to implement this in your system, maybe you could refer to this system to built your own :)
+DB Monitoring could be used to see your database status, show the current process on your database and kill the suspicious or unwanted processes that run on your database. With this project hopefully, we could make others developer out there doesn't waste their time to monitor their databases. Even you don't want to implement this in your system, maybe you could refer to this system to built your own :)
 
 ## Getting Started
 
